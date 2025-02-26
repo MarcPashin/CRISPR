@@ -19,7 +19,7 @@
     "react": "^18.2.0",
     "react-d3-library": "^1.0.4",
     "react-dom": "^18.2.0",
-    "react-latex": "^1.2.0"
+    "react-katex": "^3.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
