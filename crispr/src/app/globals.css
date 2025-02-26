@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0EA5E9;
+  --secondary: #10B981;
+  --tertiary: #6366F1;
+  --accent: #F472B6;
+  --dark-surface: #0f172a;
+  --dark-surface-light: #1e293b;
+  --dark-surface-lighter: #334155;
+  --dark-border: #334155;
+  --dark-primary: #f1f5f9;
+  --dark-secondary: #94a3b8;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-surface-lighter);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Link hover effects */
+a {
+  transition: color 0.2s ease-in-out;
+}
+
+/* Custom focus styles */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Main content adjustment for fixed navbar */
+body {
+  padding-top: 4rem;
+}
+
+/* Typography adjustments for dark mode */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--dark-primary);
+}
+
+p {
+  color: var(--dark-secondary);
+}
+
+/* Custom styling for code blocks */
+pre {
+  background-color: var(--dark-surface-light);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--dark-border);
+}
+
+code {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  color: var(--primary);
+}
+
+/* Adjust typography for dark mode in the prose component */
+.prose {
+  color: var(--dark-secondary);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: var(--dark-primary);
+}
+
+.prose a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.prose a:hover {
+  text-decoration: underline;
+}
+
+.prose strong {
+  color: var(--dark-primary);
+}
+
+.prose blockquote {
+  border-left-color: var(--dark-border);
+  color: var(--dark-secondary);
+}
+
+.prose pre {
+  background-color: var(--dark-surface-light);
+  color: var(--dark-primary);
+}
+
+.prose ul,
+.prose ol {
+  color: var(--dark-secondary);
+}
+
+/* Special effects */
+.bg-blur {
+  backdrop-filter: blur(8px);
+}
+
+.glow-effect {
+  text-shadow: 0 0 10px var(--primary);
+}
+
+.glow-border {
+  box-shadow: 0 0 10px var(--primary);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
