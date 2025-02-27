@@ -7,22 +7,25 @@ import BlogCard from '@/components/blog/BlogCard';
 import prisma from '@/lib/db';
 import { BlogPost } from '@/lib/blog-service';
 
+// Updated PageProps to match what Next.js expects
 interface PageProps {
-  params: {
+  params: Promise<{
     tag: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
   return {
-    title: `Posts tagged "${decodeURIComponent(params.tag)}" | BioCurious CRISPR Project`,
-    description: `Browse all our blog posts about ${decodeURIComponent(params.tag)}.`,
+    title: `Posts tagged "${decodeURIComponent(resolvedParams.tag)}" | BioCurious CRISPR Project`,
+    description: `Browse all our blog posts about ${decodeURIComponent(resolvedParams.tag)}.`,
   };
 }
 
 export default async function TagPage({ params }: PageProps) {
   try {
-    const { tag } = params;
+    const resolvedParams = await params;
+    const { tag } = resolvedParams;
     const decodedTag = decodeURIComponent(tag);
     
     // Direct database query for server component

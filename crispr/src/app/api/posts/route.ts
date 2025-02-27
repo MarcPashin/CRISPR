@@ -1,6 +1,54 @@
-// src/app/api/posts/route.ts
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
+
+// Define interfaces to match Prisma's return types
+interface Tag {
+  name: string;
+}
+
+interface Author {
+  name: string;
+  image: string | null;
+  bio: string | null;
+}
+
+// Define the interface to match what Prisma actually returns
+interface PrismaPost {
+  id: string;
+  title: string;
+  content: string;
+  date: Date;
+  published: boolean;
+  image: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  slug: string;
+  authorId: string;
+  author: Author;
+  tags: Tag[];
+}
+
+// The Post interface that our application uses internally
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  date: Date;
+  published: boolean;
+  author: Author;
+  tags: Tag[]; // This stays as Tag[]
+}
+
+// Create interface for the formatted posts with string[] tags
+interface FormattedPost {
+  id: string;
+  title: string;
+  content: string;
+  date: Date;
+  published: boolean;
+  author: Author;
+  tags: string[]; // This is string[]
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -64,10 +112,15 @@ export async function GET(request: Request) {
       });
     }
 
-    // Format the posts
-    const formattedPosts = posts.map((post) => ({
-      ...post,
-      tags: post.tags.map((tag) => tag.name),
+    // Format the posts with the correct typing
+    const formattedPosts: FormattedPost[] = posts.map((post: PrismaPost) => ({
+      id: post.id,
+      title: post.title,
+      content: post.content,
+      date: post.date,
+      published: post.published,
+      author: post.author,
+      tags: post.tags.map((tag: Tag) => tag.name),
     }));
 
     return NextResponse.json(formattedPosts);

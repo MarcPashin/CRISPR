@@ -2,14 +2,12 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
-interface Params {
-  params: {
-    slug: string;
-  };
-}
-
-export async function GET(request: Request, { params }: Params) {
-  const { slug } = params;
+// Using the simplest approach possible
+export async function GET(
+  _request: Request,
+  { params }: any
+) {
+  const slug = params.slug;
 
   try {
     const post = await prisma.post.findUnique({
@@ -41,31 +39,9 @@ export async function GET(request: Request, { params }: Params) {
     }
 
     // Format the post
-    interface Post {
-        slug: string;
-        published: boolean;
-        author: {
-            name: string;
-            image: string;
-            bio: string;
-        };
-        tags: Array<{ name: string }>;
-    }
-
-    interface FormattedPost {
-        slug: string;
-        published: boolean;
-        author: {
-            name: string;
-            image: string;
-            bio: string;
-        };
-        tags: string[];
-    }
-
-    const formattedPost: FormattedPost = {
-        ...post,
-        tags: post.tags.map((tag: { name: string }) => tag.name),
+    const formattedPost = {
+      ...post,
+      tags: post.tags.map((tag: { name: string }) => tag.name),
     };
 
     return NextResponse.json(formattedPost);

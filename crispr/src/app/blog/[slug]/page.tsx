@@ -7,14 +7,16 @@ import { getPostBySlugServerAction } from '@/lib/blog-actions';
 import BlogPostImage from '@/components/blog/BlogPostImage';
 import AuthorImage from '@/components/blog/AuthorImage';
 
+// Updated PageProps to match what Next.js expects
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const slug = params.slug;
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
   const post = await getPostBySlugServerAction(slug);
   
   if (!post) {
@@ -31,7 +33,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const slug = params.slug;
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
   const post = await getPostBySlugServerAction(slug);
   
   if (!post) {
