@@ -2,12 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import { getAllPosts, getAllTags } from '@/lib/blog-service';
-import BlogCard from '@/components/blog/BlogCard';
+import BlogCard from '../../../components/blog/BlogCard';
 
 export const metadata: Metadata = {
   title: 'Blog | Latest Updates from Our CRISPR Community',
   description: 'Read the latest articles, research findings, and community highlights from the BioCurious CRISPR Project.',
-};
+}; 
 
 export default async function BlogPage() {
   // Fetch posts and tags
