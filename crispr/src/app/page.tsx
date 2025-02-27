@@ -154,10 +154,10 @@ export default async function HomePage() {
       <div className="bg-dark-surface-light py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <ProjectStat value="12+" label="Active Projects" color="primary" />
-            <ProjectStat value="250+" label="Community Members" color="secondary" />
-            <ProjectStat value="45+" label="Workshop Hours" color="tertiary" />
-            <ProjectStat value="4" label="Published Protocols" color="accent" />
+            <ProjectStat value="1500+" label="Students Taught" color="primary" />
+            <ProjectStat value="250+" label="Community Members" color="primary" />
+            <ProjectStat value="10" label="Monthly Workshop Hours" color="primary" />
+            <ProjectStat value="11" label="Published Protocols" color="primary" />
           </div>
         </div>
       </div>
