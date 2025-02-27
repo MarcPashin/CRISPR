@@ -71,14 +71,14 @@ export default async function TagPage({ params }: PageProps) {
     })) as unknown as BlogPost[];
 
     return (
-      <div className="bg-gray-50 min-h-screen pb-20">
+      <div className="bg-dark-surface min-h-screen pb-20 text-dark-primary">
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 py-16">
+        <div className="bg-gradient-to-r from-dark-surface-light to-dark-surface py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">
+            <h1 className="text-4xl font-bold text-primary mb-4">
               Posts tagged "{decodedTag}"
             </h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+            <p className="text-xl text-dark-secondary max-w-3xl mx-auto">
               Browse all our content about {decodedTag}
             </p>
           </div>
@@ -89,7 +89,7 @@ export default async function TagPage({ params }: PageProps) {
           <div className="mb-8">
             <Link 
               href="/blog"
-              className="flex items-center text-gray-500 hover:text-crispr-blue"
+              className="flex items-center text-dark-secondary hover:text-primary transition-colors"
             >
               <ChevronLeft className="h-4 w-4 mr-1" />
               Back to all posts
@@ -97,11 +97,18 @@ export default async function TagPage({ params }: PageProps) {
           </div>
 
           {/* Blog Post Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {formattedPosts.map((post: BlogPost) => (
-              <BlogCard key={post.id} post={post} />
-            ))}
-          </div>
+          {formattedPosts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {formattedPosts.map((post: BlogPost) => (
+                <BlogCard key={post.id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-dark-surface-light rounded-lg shadow-dark border border-dark-border/40">
+              <h3 className="text-xl font-medium text-dark-primary mb-2">No posts found</h3>
+              <p className="text-dark-secondary">Check back soon for content about {decodedTag}!</p>
+            </div>
+          )}
         </div>
       </div>
     );
