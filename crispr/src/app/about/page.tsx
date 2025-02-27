@@ -59,14 +59,14 @@ const AboutPage: React.FC = () => {
           <p className="text-lg text-dark-secondary mb-12">
             Meet the scientists, educators, and community organizers behind the project
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {["Jane Doe", "John Smith", "Alex Johnson", "Sam Williams"].map((name, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+            {["Marc Pashin", "Luke Jun", "Avi Lekkelapudi", "Seoho Lee", "David Dolivo"].map((name, index) => (
               <div key={index} className="text-center">
                 <div className="w-32 h-32 rounded-full bg-primary flex items-center justify-center mb-4 mx-auto">
                   <span className="text-3xl font-bold text-dark-surface-light">{name.charAt(0)}</span>
                 </div>
                 <h3 className="text-xl font-bold">{name}</h3>
-                <p className="text-primary font-medium mb-2">Role Placeholder</p>
+                <p className="text-primary font-medium mb-2">Project Lead</p>
                 <p className="text-dark-secondary">Brief bio goes here.</p>
               </div>
             ))}

@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold">BioCurious</span>
-                <span className="text-xs text-primary font-semibold tracking-wider">CRISPR PROJECT</span>
+                <span className="text-xs text-primary font-semibold tracking-wider">CRISPR COMMUNITY PROJECT</span>
               </div>
             </div>
             <p className="text-dark-secondary text-sm">

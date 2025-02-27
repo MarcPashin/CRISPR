@@ -101,7 +101,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-4xl tracking-tight font-extrabold text-dark-primary sm:text-5xl md:text-6xl">
             <span className="block">BioCurious</span>
-            <span className="block text-primary">CRISPR Project</span>
+            <span className="block text-primary">CRISPR Community Project</span>
           </h1>
           <p className="mt-6 text-lg text-dark-secondary sm:text-xl max-w-2xl mx-auto">
             Democratizing synthetic biology through open-source research, education, and community participation.
