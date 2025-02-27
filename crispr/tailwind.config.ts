@@ -34,8 +34,8 @@ const config: Config = {
         'dark-surface-lighter': '#334155',   // Even lighter dark surface
       },
       textColor: {
-        'dark-primary': '#f1f5f9',           // Light text for dark mode
-        'dark-secondary': '#94a3b8',         // Secondary text for dark mode
+        'dark-primary': '#ffffff', // Brighter white for dark mode
+        'dark-secondary': '#cbd5e1', // Lighter gray for better contrast       // Secondary text for dark mode
       },
       boxShadow: {
         'dark': '0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
@@ -113,7 +113,7 @@ const config: Config = {
               color: '#f8fafc',
             },
             p: {
-              color: '#94a3b8', // dark-secondary
+              color: '#cbd5e1', // dark-secondary
             },
             strong: {
               color: '#f8fafc',
@@ -134,13 +134,13 @@ const config: Config = {
               borderLeftColor: '#334155', // dark-border
             },
             ul: {
-              color: '#94a3b8', // dark-secondary
+              color: '#cbd5e1', // dark-secondary
             },
             ol: {
-              color: '#94a3b8', // dark-secondary
+              color: '#cbd5e1', // dark-secondary
             },
             li: {
-              color: '#94a3b8', // dark-secondary
+              color: '#cbd5e1', // dark-secondary
             },
             a: {
               color: '#0EA5E9', // primary
