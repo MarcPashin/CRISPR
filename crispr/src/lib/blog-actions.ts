@@ -2,9 +2,9 @@
 'use server'
 
 import prisma from '@/lib/db';
-import { BlogPost } from './blog-service';
+import { BlogPost, Tag } from './blog-service';
 
-export async function getAllPostsAction(): Promise<BlogPost[]> {
+export async function getAllPostsServerAction(): Promise<BlogPost[]> {
   try {
     const posts = await prisma.post.findMany({
       where: {
@@ -30,43 +30,13 @@ export async function getAllPostsAction(): Promise<BlogPost[]> {
     });
 
     // Format the posts
-    interface Author {
-        name: string;
-        image: string;
-        bio: string;
-    }
-
-    interface Tag {
-        name: string;
-    }
-
-    interface Post {
-        id: string;
-        title: string;
-        content: string;
-        date: string;
-        published: boolean;
-        author: Author;
-        tags: Tag[];
-        slug: string;
-        summary: string;
-        createdAt: Date;
-        updatedAt: Date;
-    }
-
-    interface FormattedPost extends Omit<Post, 'tags'> {
-        tags: string[];
-    }
-
-    const formattedPosts: FormattedPost[] = posts.map((post: Post) => ({
-        ...post,
-        id: post.id.toString(),
-        tags: post.tags.map((tag: Tag) => tag.name),
-        slug: post.slug,
-        summary: post.summary,
-        date: post.date, // Date is already a string
-        createdAt: post.createdAt.toISOString(), // Convert Date to string
-        updatedAt: post.updatedAt.toISOString(), // Convert Date to string
+    const formattedPosts = posts.map((post: any) => ({
+      ...post,
+      tags: post.tags.map((tag: { name: string }) => tag.name),
+      // Convert dates to ISO strings
+      date: post.date.toISOString(),
+      createdAt: post.createdAt.toISOString(),
+      updatedAt: post.updatedAt.toISOString(),
     }));
     
     return formattedPosts as unknown as BlogPost[];
@@ -74,5 +44,83 @@ export async function getAllPostsAction(): Promise<BlogPost[]> {
   } catch (error) {
     console.error('Error fetching blog posts:', error);
     throw new Error('Failed to fetch blog posts');
+  }
+}
+
+export async function getPostBySlugServerAction(slug: string): Promise<BlogPost | null> {
+  try {
+    const post = await prisma.post.findUnique({
+      where: {
+        slug: slug,
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+            image: true,
+            bio: true,
+          },
+        },
+        tags: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!post) {
+      return null;
+    }
+
+    // Format the post
+    const formattedPost = {
+      ...post,
+      tags: post.tags.map((tag: { name: string }) => tag.name),
+      // Convert dates to ISO strings
+      date: post.date.toISOString(),
+      createdAt: post.createdAt.toISOString(),
+      updatedAt: post.updatedAt.toISOString(),
+    };
+
+    return formattedPost as unknown as BlogPost;
+  } catch (error) {
+    console.error('Error fetching blog post:', error);
+    throw new Error('Failed to fetch blog post');
+  }
+}
+
+export async function getAllTagsServerAction(): Promise<Tag[]> {
+  try {
+    // Get all tags and count posts for each tag
+    const tags = await prisma.tag.findMany({
+      include: {
+        _count: {
+          select: {
+            posts: {
+              where: {
+                published: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        posts: {
+          _count: 'desc',
+        },
+      },
+    });
+
+    // Format the tags with their post counts
+    const formattedTags = tags.map((tag: { name: string; _count: { posts: number } }) => ({
+      name: tag.name,
+      count: tag._count.posts,
+    }));
+
+    return formattedTags;
+  } catch (error) {
+    console.error('Error fetching tags:', error);
+    throw new Error('Failed to fetch tags');
   }
 }

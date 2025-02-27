@@ -1,7 +1,7 @@
+// src/app/api/posts/route.ts
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
-// Get all blog posts
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const tag = searchParams.get('tag');
@@ -65,29 +65,9 @@ export async function GET(request: Request) {
     }
 
     // Format the posts
-    interface Author {
-        name: string;
-        image: string | null;
-        bio: string | null;
-    }
-
-    interface Tag {
-        name: string;
-    }
-
-    interface Post {
-        id: number;
-        title: string;
-        content: string;
-        published: boolean;
-        date: Date;
-        author: Author;
-        tags: Tag[];
-    }
-
-    const formattedPosts: { id: number; title: string; content: string; published: boolean; date: Date; author: Author; tags: string[] }[] = posts.map((post: Post) => ({
-        ...post,
-        tags: post.tags.map((tag: Tag) => tag.name),
+    const formattedPosts = posts.map((post) => ({
+      ...post,
+      tags: post.tags.map((tag) => tag.name),
     }));
 
     return NextResponse.json(formattedPosts);

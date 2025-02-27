@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
-import { getPostsByTag, BlogPost } from '@/lib/blog-service';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import BlogCard from '@/components/blog/BlogCard'; 
+import BlogCard from '@/components/blog/BlogCard';
+import prisma from '@/lib/db';
+import { BlogPost } from '@/lib/blog-service';
 
 interface PageProps {
   params: {
@@ -14,8 +15,8 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   return {
-    title: `Posts tagged "${params.tag}" | BioCurious CRISPR Project`,
-    description: `Browse all our blog posts about ${params.tag}.`,
+    title: `Posts tagged "${decodeURIComponent(params.tag)}" | BioCurious CRISPR Project`,
+    description: `Browse all our blog posts about ${decodeURIComponent(params.tag)}.`,
   };
 }
 
@@ -23,11 +24,48 @@ export default async function TagPage({ params }: PageProps) {
   try {
     const { tag } = params;
     const decodedTag = decodeURIComponent(tag);
-    const posts = await getPostsByTag(decodedTag);
+    
+    // Direct database query for server component
+    const posts = await prisma.post.findMany({
+      where: {
+        published: true,
+        tags: {
+          some: {
+            name: decodedTag,
+          },
+        },
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+            image: true,
+            bio: true,
+          },
+        },
+        tags: {
+          select: {
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        date: 'desc',
+      },
+    });
 
     if (!posts || posts.length === 0) {
       notFound();
     }
+
+    // Format the posts
+    const formattedPosts = posts.map((post: any) => ({
+      ...post,
+      tags: post.tags.map((tag: { name: string }) => tag.name),
+      date: post.date.toISOString(),
+      createdAt: post.createdAt.toISOString(),
+      updatedAt: post.updatedAt.toISOString(),
+    })) as unknown as BlogPost[];
 
     return (
       <div className="bg-gray-50 min-h-screen pb-20">
@@ -57,7 +95,7 @@ export default async function TagPage({ params }: PageProps) {
 
           {/* Blog Post Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post: BlogPost) => (
+            {formattedPosts.map((post: BlogPost) => (
               <BlogCard key={post.id} post={post} />
             ))}
           </div>

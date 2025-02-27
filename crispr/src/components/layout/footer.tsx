@@ -100,7 +100,7 @@ const Footer: React.FC = () => {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-primary mr-2 mt-0.5 flex-shrink-0" />
                 <span className="text-dark-secondary">
-                  845 Stewart Drive, Sunnyvale, CA 94085
+                3108 Patrick Henry Drive, Santa Clara, 95054
                 </span>
               </li>
               <li className="flex items-center">
