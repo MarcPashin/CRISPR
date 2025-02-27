@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Dna, Microscope, Users } from 'lucide-react';
+import { getAllPostsServerAction } from '@/lib/blog-actions';
+import { BlogPost } from '@/lib/blog-service';
 
 // Feature Card Component
 interface FeatureCardProps {
@@ -38,39 +40,59 @@ const ProjectStat = ({ value, label, color = "primary" }: ProjectStatProps) => (
 
 // Blog Preview Card Component
 interface BlogPreviewProps {
-  title: string;
-  date: string;
-  summary: string;
-  slug: string;
+  post: BlogPost;
 }
 
-const BlogPreview = ({ title, date, summary, slug }: BlogPreviewProps) => (
-  <div className="bg-dark-surface-light rounded-lg shadow-dark overflow-hidden border border-dark-border/40 hover:border-primary/20 transition-all duration-300">
-    <div className="h-48 bg-dark-surface relative">
-      <Image 
-        src="/api/placeholder/600/400" 
-        alt={title} 
-        fill 
-        sizes="(max-width: 768px) 100vw, 33vw"
-        className="object-cover opacity-80"
-      />
+const BlogPreview = ({ post }: BlogPreviewProps) => {
+  const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+  
+  return (
+    <div className="bg-dark-surface-light rounded-lg shadow-dark overflow-hidden border border-dark-border/40 hover:border-primary/20 transition-all duration-300">
+      <div className="h-48 bg-dark-surface relative">
+        {post.image ? (
+          <Image 
+            src={post.image} 
+            alt={post.title} 
+            fill 
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover opacity-80"
+          />
+        ) : (
+          <Image 
+            src="/api/placeholder/600/400" 
+            alt={post.title} 
+            fill 
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover opacity-80"
+          />
+        )}
+      </div>
+      <div className="p-6">
+        <p className="text-sm text-dark-secondary">{formattedDate}</p>
+        <h3 className="text-xl font-bold mb-2 text-dark-primary">{post.title}</h3>
+        <p className="text-dark-secondary mb-4">{post.summary}</p>
+        <Link
+          href={`/blog/${post.slug}`}
+          className="text-primary font-medium hover:underline"
+        >
+          Read more →
+        </Link>
+      </div>
     </div>
-    <div className="p-6">
-      <p className="text-sm text-dark-secondary">{date}</p>
-      <h3 className="text-xl font-bold mb-2 text-dark-primary">{title}</h3>
-      <p className="text-dark-secondary mb-4">{summary}</p>
-      <Link
-        href={`/blog/${slug}`}
-        className="text-primary font-medium hover:underline"
-      >
-        Read more →
-      </Link>
-    </div>
-  </div>
-);
+  );
+};
 
 // Main Home Page Component
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch the latest blog posts
+  const posts = await getAllPostsServerAction();
+  // Take just the 3 most recent posts for the homepage
+  const recentPosts = posts.slice(0, 3);
+  
   return (
     <div className="w-full min-h-screen flex flex-col justify-between bg-dark-surface text-dark-primary">
       {/* Hero Section */}
@@ -148,25 +170,15 @@ export default function HomePage() {
             <p className="mt-4 text-xl text-dark-secondary">News and insights from our research team</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Blog preview cards - would be generated from actual data in production */}
-            <BlogPreview 
-              title="Introduction to CRISPR"
-              date="April 1, 2023"
-              summary="Learn about our community CRISPR project, its goals, and how you can get involved."
-              slug="introduction-to-crispr"
-            />
-            <BlogPreview 
-              title="Safety First: CRISPR Lab Protocols"
-              date="April 15, 2023"
-              summary="A comprehensive guide to maintaining safety standards when working with CRISPR in community labs."
-              slug="crispr-safety-protocols"
-            />
-            <BlogPreview 
-              title="Ethical Considerations in Gene Editing"
-              date="May 1, 2023"
-              summary="Exploring the ethical dimensions of gene editing and how community labs can navigate these complex questions."
-              slug="gene-editing-ethics"
-            />
+            {recentPosts.length > 0 ? (
+              recentPosts.map(post => (
+                <BlogPreview key={post.id} post={post} />
+              ))
+            ) : (
+              <div className="col-span-3 text-center py-12 bg-dark-surface-light rounded-lg">
+                <p className="text-dark-secondary">No blog posts found. Check back soon for updates!</p>
+              </div>
+            )}
           </div>
           <div className="text-center mt-12">
             <Link

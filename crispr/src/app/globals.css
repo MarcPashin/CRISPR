@@ -150,3 +150,86 @@ code {
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add these custom styles for blog content */
+.blog-content h1 {
+  @apply text-3xl font-bold mt-10 mb-6 text-gray-900;
+}
+
+.blog-content h2 {
+  @apply text-2xl font-bold mt-8 mb-4 text-gray-900;
+}
+
+.blog-content h3 {
+  @apply text-xl font-bold mt-6 mb-3 text-gray-900;
+}
+
+.blog-content p {
+  @apply text-lg leading-relaxed my-5 text-gray-800;
+}
+
+.blog-content ul {
+  @apply list-disc pl-8 my-6 space-y-2;
+}
+
+.blog-content ol {
+  @apply list-decimal pl-8 my-6 space-y-2;
+}
+
+.blog-content li {
+  @apply text-lg text-gray-800 mb-2;
+}
+
+.blog-content strong {
+  @apply font-bold text-gray-900;
+}
+
+.blog-content em {
+  @apply italic;
+}
+
+.blog-content a {
+  @apply text-blue-600 hover:text-blue-800 underline;
+}
+
+.blog-content blockquote {
+  @apply pl-4 border-l-4 border-gray-300 italic my-6 text-gray-700;
+}
+
+.blog-content img {
+  @apply rounded-lg my-6 mx-auto;
+}
+
+.blog-content hr {
+  @apply my-8 border-t border-gray-300;
+}
+
+.blog-content pre {
+  @apply bg-gray-100 p-4 rounded-lg overflow-x-auto my-6;
+}
+
+.blog-content code {
+  @apply font-mono text-sm bg-gray-100 px-1 py-0.5 rounded;
+}
+
+/* Add spacing between components */
+.blog-content > *:first-child {
+  @apply mt-0;
+}
+
+.blog-content > *:last-child {
+  @apply mb-0;
+}
+
+/* Fix for the Cas9 enzyme and Guide RNA elements that were hard to read */
+.blog-content ul li strong {
+  @apply block text-gray-900 font-bold mb-1;
+}
+
+/* Additional style to ensure list items are clearly visible */
+.blog-content ul {
+  @apply bg-gray-50 rounded-lg p-4;
+}
