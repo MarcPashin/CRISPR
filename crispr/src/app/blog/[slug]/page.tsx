@@ -81,6 +81,13 @@ export default async function BlogPostPage({ params }: PageProps) {
               {post.title}
             </h1>
             
+            {/* Summary */}
+            {post.summary && (
+              <p className="text-lg text-dark-secondary mb-6 font-medium">
+                {post.summary}
+              </p>
+            )}
+            
             <div className="flex items-center text-dark-secondary mb-8">
               <span>{formattedDate}</span>
               <span className="mx-2">•</span>
