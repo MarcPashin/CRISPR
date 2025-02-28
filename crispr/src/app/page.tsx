@@ -155,9 +155,9 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <ProjectStat value="1500+" label="Students Taught" color="primary" />
-            <ProjectStat value="250+" label="Community Members" color="primary" />
+            <ProjectStat value="3000+" label="Hours Volunteered" color="primary" />
             <ProjectStat value="10" label="Monthly Workshop Hours" color="primary" />
-            <ProjectStat value="11" label="Published Protocols" color="primary" />
+            <ProjectStat value="10" label="Published Protocols" color="primary" />
           </div>
         </div>
       </div>
