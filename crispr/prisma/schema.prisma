@@ -85,3 +85,37 @@ enum Role {
   USER
   ADMIN
 }
+
+// Add this model to your schema.prisma file
+
+model Image {
+  id        String   @id @default(cuid())
+  filename  String
+  data      Bytes    // Binary data of the image stored directly in the database
+  mimeType  String   // Store the MIME type (e.g., image/jpeg, image/png)
+  size      Int      // Size in bytes
+  createdAt DateTime @default(now())
+  postId    String?  // Optional because an image might not be attached to a post yet
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: SetNull)
+}
+
+// Then update your Post model to have a relation to Image
+model Post {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  summary     String
+  content     String
+  date        DateTime @default(now())
+  readingTime String?
+  image       String?   // Keep this for backward compatibility or URL references
+  imageId     String?   // New field to relate to the Image model
+  featuredImage Image?  @relation(fields: [imageId], references: [id])
+  published   Boolean  @default(false)
+  authorId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      User     @relation(fields: [authorId], references: [id])
+  tags        Tag[]    @relation("PostToTag")
+  images      Image[]  // A post can have multiple images (the featured one + others in content)
+}
