@@ -1,94 +1,104 @@
 import React from 'react';
-import Head from 'next/head';
-import { CalendarDays, Clock, MapPin } from 'lucide-react';
+import { Metadata } from 'next';
+import LabMemberCard, { LabMember } from '@/components/about/LabMemberCard';
 
-const AboutPage: React.FC = () => {
+export const metadata: Metadata = {
+  title: 'About Us | BioCurious CRISPR Project',
+  description: 'Meet our team of researchers, scientists, and biotech enthusiasts behind the BioCurious CRISPR Project.',
+};
+
+// In a real app, this would come from your database
+// For now, we'll use hardcoded data that you can replace later
+const labMembers: LabMember[] = [
+  {
+    id: '1',
+    name: 'Marc Pashin',
+    role: 'Project Leader',
+    image: '/images/team/marc-pashin.png',
+    shortBio: 'Project leader at BioCurious and Stanford research intern specializing in CRISPR gene editing and computational biology.',
+    slug: 'marc-pashin'
+  },
+  {
+    id: '2',
+    name: 'Luke Jun',
+    role: 'Project Leader',
+    image: '/images/team/blank-profile.png',
+    shortBio: 'Project leader at BioCurious specializing in CRISPR applications and molecular biology.',
+    slug: 'luke-jun'
+  },
+  {
+    id: '3',
+    name: 'Avi Lekkelapudi',
+    role: 'Project Leader',
+    image: '/images/team/blank-profile.png',
+    shortBio: 'Project leader focused on CRISPR technology implementation and genetic research.',
+    slug: 'avi-lekkelapudi'
+  },
+  {
+    id: '4',
+    name: 'Seoho Lee',
+    role: 'Project Leader',
+    image: '/images/team/blank-profile.png',
+    shortBio: 'Project leader specializing in CRISPR applications and biotechnology research.',
+    slug: 'seoho-lee'
+  },
+  {
+    id: '5',
+    name: 'David Dolivo',
+    role: 'Research Mentor',
+    image: '/images/team/blank-profile.png',
+    shortBio: 'Research mentor providing guidance and expertise in CRISPR and molecular biology.',
+    slug: 'david-dolivo'
+  }
+];
+
+export default function AboutPage() {
   return (
-    <div className="bg-dark-surface min-h-screen text-dark-primary">
-      <Head>
-        <title>About | BioCurious CRISPR Project</title>
-        <meta 
-          name="description" 
-          content="Learn about the BioCurious CRISPR project, our mission, team, and history." 
-        />
-      </Head>
-
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-dark-surface-light to-dark-surface py-20 text-center">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold text-primary mb-6">About Our Project</h1>
-          <p className="text-xl text-dark-secondary max-w-3xl mx-auto">
-            The BioCurious CRISPR Project is a community-driven initiative aimed at democratizing access to 
-            synthetic biology tools and knowledge. We believe everyone should have the opportunity to 
-            understand and participate in the biotechnology revolution.
-          </p>
+    <div className="bg-dark-surface min-h-screen pb-20 text-dark-primary">
+      {/* About Header */}
+      <div className="bg-gradient-to-r from-dark-surface-light to-dark-surface py-16 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl font-bold text-primary mb-4">About Us</h1>
+            
         </div>
       </div>
 
-      {/* Mission Section */}
-      <div className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-dark-primary mb-4">Our Mission</h2>
-          <p className="text-lg text-dark-secondary">
-            Building an inclusive, educated community around CRISPR technology
+      {/* Mission Statement Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="bg-dark-surface-light rounded-lg shadow-dark p-8 border border-dark-border/40 mb-16">
+          <h2 className="text-2xl font-bold text-primary mb-4">Our Mission</h2>
+          <p className="text-dark-secondary mb-4">
+            At BioCurious, our CRISPR Project aims to educate the local community about gene editing technology while providing access to essential laboratory materials and equipment. Through hands-on workshops, open-source research, and community collaboration, we're making CRISPR technology more accessible to students and enthusiasts. We believe that by removing barriers to entry and providing practical experience, we can accelerate innovation in biotechnology and empower the next generation of scientists.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
-            {[
-              { icon: CalendarDays, title: "Education", desc: "Develop curricula, workshops, and resources..." },
-              { icon: Clock, title: "Research", desc: "Conduct open, transparent citizen science projects..." },
-              { icon: MapPin, title: "Community", desc: "Build a diverse, inclusive community..." }
-            ].map(({ icon: Icon, title, desc }, index) => (
-              <div key={index} className="text-center">
-                <div className="flex justify-center mb-4">
-                  <div className="p-4 bg-primary/10 rounded-full">
-                    <Icon className="w-8 h-8 text-primary" />
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold mb-2">{title}</h3>
-                <p className="text-dark-secondary">{desc}</p>
-              </div>
-            ))}
-          </div>
+          <p className="text-dark-secondary">
+            Our team brings together experts from diverse backgrounds in molecular biology, bioinformatics, ethics, and education to create a holistic approach to advancing CRISPR research while promoting responsible use of gene editing technologies.
+          </p>
+        </div>
+
+        
+
+        {/* Team Grid */}
+        <h2 className="text-2xl font-bold text-primary mb-8">Meet Our Team</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {labMembers.map((member) => (
+            <LabMemberCard key={member.id} member={member} />
+          ))}
         </div>
       </div>
 
-      {/* Team Section */}
-      <div className="bg-dark-surface-light py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-dark-primary mb-4">Our Team</h2>
-          <p className="text-lg text-dark-secondary mb-12">
-            Meet the scientists, educators, and community organizers behind the project
+      {/* Join Our Team Section */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+        <div className="bg-dark-surface-light rounded-lg shadow-dark p-8 border border-dark-border/40 text-center">
+          <h2 className="text-2xl font-bold text-primary mb-4">Join Our Team</h2>
+          <p className="text-dark-secondary mb-6">
+            Passionate about biotech and CRISPR technology? We're always looking for curious minds to join our community and contribute to groundbreaking research.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-            {["Marc Pashin", "Luke Jun", "Avi Lekkelapudi", "Seoho Lee", "David Dolivo"].map((name, index) => (
-              <div key={index} className="text-center">
-                <div className="w-32 h-32 rounded-full bg-primary flex items-center justify-center mb-4 mx-auto">
-                  <span className="text-3xl font-bold text-dark-surface-light">{name.charAt(0)}</span>
-                </div>
-                <h3 className="text-xl font-bold">{name}</h3>
-                <p className="text-primary font-medium mb-2">Project Lead</p>
-                <p className="text-dark-secondary">Brief bio goes here.</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Join Us CTA */}
-      <div className="bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 py-16 text-center">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-dark-primary mb-6">Join Our Community</h2>
-          <p className="text-xl text-dark-secondary mb-8 max-w-3xl mx-auto">
-            Whether you're a scientist, educator, student, or just curious about CRISPR technology, 
-            there's a place for you in our community.
-          </p>
-          <button className="px-8 py-3 bg-primary hover:bg-primary/80 text-dark-surface-light font-medium rounded-md transition-colors">
-            Get Involved
+          <button className="bg-primary hover:bg-primary/80 text-dark-surface-light px-6 py-3 rounded-md font-medium transition-colors duration-300">
+            View Open Positions
           </button>
         </div>
       </div>
     </div>
   );
-};
-
-export default AboutPage;
+}

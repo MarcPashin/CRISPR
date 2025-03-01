@@ -194,7 +194,9 @@ const Navbar: React.FC = () => {
           <nav className="hidden md:flex items-center space-x-4">
             <NavLink href="/" label="Home" isActive={isActivePath('/')} />
             <NavLink href="/about" label="About" isActive={isActivePath('/about')} />
-            <NavLink 
+            <NavLink href="/blog" label="Blog" isActive={isActivePath('/blog')} />
+            <NavLink href="/events" label="Events" isActive={isActivePath('/events')} />
+         {/*   <NavLink 
               href="/projects" 
               label="Projects" 
               isActive={isActivePath('/projects')}
@@ -245,14 +247,16 @@ const Navbar: React.FC = () => {
                 Resources
               </Link>
             </NavLink>
-            <NavLink href="/contact" label="Contact" isActive={isActivePath('/contact')} />
+            <NavLink href="/contact" label="Contact" isActive={isActivePath('/contact')} />*/}
           </nav>
 
           {/* CTA Button (Desktop) */}
           <div className="hidden md:block">
             <Link 
-              href="/join"
+              href="https://www.meetup.com/biocurious/events/305392856/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link"
               className="ml-4 px-4 py-2 rounded-md bg-primary text-dark-primary text-sm font-medium hover:bg-primary/80 transition-colors duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Join Us
             </Link>

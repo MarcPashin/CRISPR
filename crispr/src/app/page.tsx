@@ -111,13 +111,13 @@ export default async function HomePage() {
               href="/projects"
               className="px-8 py-3 bg-primary hover:bg-primary/80 text-dark-primary rounded-md font-medium transition-colors duration-300"
             >
-              Explore Projects
+              Explore Our Blog
             </Link>
             <Link 
-              href="/community"
+              href="https://www.meetup.com/biocurious/events/305392856/?utm_medium=referral&utm_campaign=share-btn_savedevents_share_modal&utm_source=link"
               className="px-8 py-3 border border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-colors duration-300"
             >
-              Join Community
+              Register
             </Link>
           </div>
         </div>
