@@ -22,7 +22,7 @@ const labMembers: LabMember[] = [
     id: '2',
     name: 'Luke Jun',
     role: 'Project Leader',
-    image: '/images/team/blank-profile.png',
+    image: '/images/team/Luke-Jun.jpeg',
     shortBio: 'Project leader at BioCurious specializing in CRISPR applications and molecular biology.',
     slug: 'luke-jun'
   },
@@ -30,7 +30,7 @@ const labMembers: LabMember[] = [
     id: '3',
     name: 'Avi Lekkelapudi',
     role: 'Project Leader',
-    image: '/images/team/blank-profile.png',
+    image: '/images/team/Avi-Lek.jpeg',
     shortBio: 'Project leader focused on CRISPR technology implementation and genetic research.',
     slug: 'avi-lekkelapudi'
   },
@@ -46,7 +46,7 @@ const labMembers: LabMember[] = [
     id: '5',
     name: 'David Dolivo',
     role: 'Research Mentor',
-    image: '/images/team/blank-profile.png',
+    image: '/images/team/david-dolivo.jpeg',
     shortBio: 'Research mentor providing guidance and expertise in CRISPR and molecular biology.',
     slug: 'david-dolivo'
   }
