@@ -51,12 +51,13 @@ const labMembersData: Record<string, LabMember & {
     id: '2',
     name: 'Luke Jun',
     role: 'Project Leader',
-    image: '/images/team/blank-profile.png',
+    image: '/images/team/Luke-Jun.jpeg',
     shortBio: 'Project leader at BioCurious specializing in CRISPR applications and molecular biology.',
     slug: 'luke-jun',
     fullBio: `Luke Jun leads innovative CRISPR research projects at BioCurious, focusing on developing novel gene editing applications and protocols. His work combines practical laboratory expertise with creative problem-solving approaches to advance accessible biotechnology.`,
     education: [
-      'Bellarmine College Preparatory, Expected Graduation: May 2026'
+      'Bellarmine College Preparatory, Expected Graduation: May 2025',
+      'UPenn, Expected Graduation: May 2029'
     ],
     research: [
       'CRISPR gene editing protocols',
@@ -70,12 +71,13 @@ const labMembersData: Record<string, LabMember & {
     id: '3',
     name: 'Avi Lekkelapudi',
     role: 'Project Leader',
-    image: '/images/team/blank-profile.png',
+    image: '/images/team/Avi-Lek.jpeg',
     shortBio: 'Project leader focused on CRISPR technology implementation and genetic research.',
     slug: 'avi-lekkelapudi',
     fullBio: `Avi Lekkelapudi leads key projects at BioCurious, bringing expertise in CRISPR technology and genetic research. His work emphasizes practical applications of gene editing techniques and developing accessible protocols for the community.`,
     education: [
-      'Bellarmine College Preparatory, Expected Graduation: May 2026'
+      'Bellarmine College Preparatory, Expected Graduation: May 2025',
+      'UIUC, Expected Graduation: May 2029'
     ],
     research: [
       'CRISPR implementation strategies',
@@ -94,7 +96,7 @@ const labMembersData: Record<string, LabMember & {
     slug: 'seoho-lee',
     fullBio: `Seoho Lee directs crucial projects at BioCurious, combining technical expertise with innovative approaches to CRISPR research. His work focuses on making advanced biotechnology accessible and practical for community science applications.`,
     education: [
-      'Bellarmine College Preparatory, Expected Graduation: May 2026'
+      'Branham High School, Expected Graduation: May 2026'
     ],
     research: [
       'CRISPR technology applications',
@@ -108,7 +110,7 @@ const labMembersData: Record<string, LabMember & {
     id: '5',
     name: 'David Dolivo',
     role: 'Research Mentor',
-    image: '/images/team/blank-profile.png',
+    image: '/images/team/david-dolivo.jpeg',
     shortBio: 'Research mentor providing guidance and expertise in CRISPR and molecular biology.',
     slug: 'david-dolivo',
     fullBio: `David Dolivo serves as a research mentor at BioCurious, providing essential guidance and expertise to project teams. His experience in molecular biology and CRISPR technology helps shape the direction of research projects and ensures scientific rigor in all endeavors.`,
